@@ -1,7 +1,8 @@
 export default {
-  entry: "./test/entry.js",
+  entry: {
+    "entry": "./test/entry.js", "entry-verbose": "./test/entry-verbose.js"
+  },
   output: {
-    filename: "entry.js",
     path: new URL("./dist/test-webpack", import.meta.url).pathname,
   },
 };

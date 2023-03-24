@@ -1,3 +1,4 @@
+console.log("Starting tests.");
 import { config } from "./config.js";
 
 async function testLoad(resourceType, loadFn) {
