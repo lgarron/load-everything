@@ -93,8 +93,7 @@
     <b>resolve</b> the path of a relative resource, which can then be loaded in the appropriate way: <a
       href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve"><code>import.meta.resolve(…)</code></a>
     <br><br>
-    Although there is special syntax for some resources (such as <a
-      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">static import</a>),
+    Although there is special syntax for some resources (such as <a href="#static-imports">static imports</a>),
     this is by far the most flexible option. The following examples work in all modern browsers already:
     <br><br>
     <code class="example">// JS
@@ -222,8 +221,8 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
         handle arbitrary resource imports in the future.</li>
     </ul>
     Therefore, it is still valuable to support
-    <code>import.meta.resolve(…)</code> and <code>new URL(…, import.meta.url)</code> for code that can handle all these
-    use cases, <b>today and
+    <code>import.meta.resolve(…)</code> and <code>new URL(…, import.meta.url)</code> for code that can handle all
+    resource paths, <b>today and
       into the future</b>.
   </section>
 </body>
