@@ -188,3 +188,22 @@ code.example {
 code.example a {
   color: white;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  font-weight: bold;
+}
+
+td {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 0.5em;
+  text-align: center;
+}
+
+tbody {
+  border-top: 5px solid rgba(0, 0, 0, 0.8);
+}

@@ -1,3 +1,5 @@
+import { config } from "./config.js";
+
 async function testLoad(resourceType, loadFn) {
   try {
     if (await loadFn() === true) {
@@ -6,7 +8,11 @@ async function testLoad(resourceType, loadFn) {
       console.error("❌", resourceType);
     }
   } catch(e) {
-    console.error("❌", resourceType, e.__proto__.name);
+    if (config.verbose) {
+      console.error("❌", resourceType, e);
+    } else {
+      console.error("❌", resourceType, e?.__proto__?.name);
+    }
   }
 }
 
@@ -46,55 +52,67 @@ async function testLoad(resourceType, loadFn) {
 
   await testLoad("Web worker (sync import.meta.resolve)", async () => {
     return new Promise((resolve, reject) => {
-      const workerPath = import.meta.resolve("./indirect-path/worker.js");
-      if (!globalThis.Worker) {
-        resolve(false);
-        return;
+      try {
+        const workerPath = import.meta.resolve("./indirect-path/worker.js");
+        if (!globalThis.Worker) {
+          resolve(false);
+          return;
+        }
+        const worker = new Worker(workerPath, { type: "module" });
+        worker.addEventListener("message", (e) => {
+          resolve(e.data === "okay")
+        });
+        worker.postMessage("test");
+        setTimeout(() => {
+          reject(new Error("worker load timed out"));
+        }, 2000);
+      } catch (e) {
+        reject(e);
       }
-      const worker = new Worker(workerPath, { type: "module" });
-      worker.addEventListener("message", (e) => {
-        resolve(e.data === "okay")
-      });
-      worker.postMessage("test");
-      setTimeout(() => {
-        reject(new Error("worker load timed out"));
-      }, 2000);
     });
   });
 
   await testLoad("Web worker (async import.meta.resolve)", async () => {
     return new Promise(async (resolve, reject) => {
-      const workerPath = await import.meta.resolve("./indirect-path/worker.js");
-      if (!globalThis.Worker) {
-        resolve(false);
-        return;
+      try {
+        const workerPath = await import.meta.resolve("./indirect-path/worker.js");
+        if (!globalThis.Worker) {
+          resolve(false);
+          return;
+        }
+        const worker = new Worker(workerPath, { type: "module" });
+        worker.addEventListener("message", (e) => {
+          resolve(e.data === "okay")
+        });
+        worker.postMessage("test");
+        setTimeout(() => {
+          reject(new Error("worker load timed out"));
+        }, 2000);
+      } catch (e) {
+        reject(e);
       }
-      const worker = new Worker(workerPath, { type: "module" });
-      worker.addEventListener("message", (e) => {
-        resolve(e.data === "okay")
-      });
-      worker.postMessage("test");
-      setTimeout(() => {
-        reject(new Error("worker load timed out"));
-      }, 2000);
     });
   });
 
   await testLoad("Web worker (new URL)", async () => {
     return new Promise((resolve, reject) => {
-      const workerPath = new URL("./indirect-path/worker.js", import.meta.url);
-      if (!globalThis.Worker) {
-        resolve(false);
-        return;
+      try {
+        const workerPath = new URL("./indirect-path/worker.js", import.meta.url);
+        if (!globalThis.Worker) {
+          resolve(false);
+          return;
+        }
+        const worker = new Worker(workerPath, { type: "module" });
+        worker.addEventListener("message", (e) => {
+          resolve(e.data === "okay")
+        });
+        worker.postMessage("test");
+        setTimeout(() => {
+          reject(new Error("worker load timed out"));
+        }, 2000);
+      } catch (e) {
+        reject(e);
       }
-      const worker = new Worker(workerPath, { type: "module" });
-      worker.addEventListener("message", (e) => {
-        resolve(e.data === "okay")
-      });
-      worker.postMessage("test");
-      setTimeout(() => {
-        reject(new Error("worker load timed out"));
-      }, 2000);
     });
   });
 
@@ -124,4 +142,5 @@ async function testLoad(resourceType, loadFn) {
   // // text
   // console.log(await response.text());
 
+  console.log("Tests finished.")
 })();
