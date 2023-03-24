@@ -55,6 +55,12 @@ test-webpack:
 	cp test/index.html dist/test-webpack/
 	open http://localhost:8000/test-webpack/; caddy file-server --listen :8000 --browse --root dist
 
+.PHONY: test-swcpack
+test-swcpack:
+	npx spack --config ./script/swcpack/spack.config.js
+	cp test/index.html dist/test-swcpack/
+	open http://localhost:8000/test-swcpack/; caddy file-server --listen :8000 --browse --root dist
+
 .PHONY: clean
 clean:
 	rm -rf ./parce-cache ./dist

@@ -219,8 +219,9 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
   <h2 id="compatibility-dashboard"><a href="#compatibility-dashboard">PART 7<br>Compatibility dashboard</a></h2>
   <section>
 
-    Each entry has two markers for test results using <a href="https://garron.net/temp/load-everything/test/">this
-      code</a>, one marker for supporting each of the following (in order):
+    Each environment was tested using <a href="https://garron.net/temp/load-everything/test/">this
+      code</a> and <a href="https://garron.net/temp/load-everything/Makefile">these commands</a>. Each entry has two
+    result markers, one for supporting each of the following (in order):
 
     <ul>
       <li><code>import.meta.resolve(…)</code></li>
@@ -229,7 +230,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
     Legend:
     <ul>
       <li>✅ Works by default</li>
-      <li>⚠️ Requires non-standard workaround</li>
+      <li>⚠️ Requires non-standard workaround (that does not break compat with other environments)</li>
       <li>❌ Does not work</li>
       <li>🚫 Unsupported runtime feature</li>
     </ul>
@@ -334,6 +335,14 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>❌ ❌</td>
           <td>❌ ✅</td>
           <td>❌ ✅</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
+        </tr>
+        <tr>
+          <td><code>swcpack</code> 0.1.62</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
           <td>❌ ❌</td>
           <td>❌ ❌</td>
         </tr>
