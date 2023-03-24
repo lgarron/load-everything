@@ -20,16 +20,6 @@
   <p class="subtitle">
     Load resources in JavaScript using code that works in all <s>universes</s> environments, using
     <a href="#import.meta.resolve"><code>import.meta.resolve(…)</code></a> and friends.
-    <!-- A standard convention for loading
-    <br>
-    <span class="alternatives">modules | CSS | images | web workers | WASM</span>
-    <br>
-    in
-    <br>
-    <span class="alternatives">browsers | <a href="https://nodejs.org/en/about">Node.js</a> | bundlers | <a
-        href="https://deno.land/">deno</a> | <a href="https://bun.sh/">bun</a></span>
-    <br>
-    using standard JavaScript module features. -->
   </p>
   <h2 id="everything"><a href="#everything">PART 1<br>EVERYTHING</a></h2>
   <section>
@@ -226,45 +216,30 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
       into the future</b>.
   </section>
 
-  <h2 id="compatibility-status"><a href="#compatibility-status">PART 7<br>Compatibility status</a></h2>
+  <h2 id="compatibility-dashboard"><a href="#compatibility-dashboard">PART 7<br>Compatibility dashboard</a></h2>
   <section>
 
-    Each entry has two scores:
-    <br>
-    <table>
-      <thead>
-        <td>Mechanism</td>
-        <td><code>import.meta.resolve(…)</code></td>
-        <td><code>new URL(…, import.meta.url)</code></td>
-      </thead>
-      <tr>
-        <td>✅</td>
-        <td>Works</td>
-        <td>Works</td>
-      </tr>
-      <tr>
-        <td>⚠️</td>
-        <td>Has a workaround</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td>❌</td>
-        <td>Does not work</td>
-        <td>Does not work</td>
-      </tr>
-      <tr>
-        <td>🚫</td>
-        <td>Unsupported runtime feature</td>
-        <td>Unsupported runtime feature</td>
-      </tr>
-    </table>
-    <br>
+    Each entry has two markers for test results using <a href="https://garron.net/temp/load-everything/test/">this
+      code</a>, one marker for supporting each of the following (in order):
+
+    <ul>
+      <li><code>import.meta.resolve(…)</code></li>
+      <li><code>new URL(…, import.meta.url)</code></li>
+    </ul>
+    Legend:
+    <ul>
+      <li>✅ Works by default</li>
+      <li>⚠️ Requires non-standard workaround</li>
+      <li>❌ Does not work</li>
+      <li>🚫 Unsupported runtime feature</li>
+    </ul>
     <table>
       <thead>
         <tr>
           <td>Environment</td>
           <td>JavaScript</td>
           <td>JSON</td>
+          <td>Image</td>
           <td>Web worker</td>
           <td>WASM</td>
         </tr>
@@ -276,9 +251,11 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>✅ ✅</td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
+          <td>✅ ✅</td>
         </tr>
         <tr>
-          <td>Firefox 113</td>
+          <td>Firefox<sup>2</sup> 113</td>
+          <td>✅ ✅</td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
@@ -290,38 +267,43 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>✅ ✅</td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
+          <td>✅ ✅</td>
         </tr>
       </tbody>
       <tbody>
         <tr>
-          <td><code>node</code><sup>1</sup> 19.7.0</td>
-          <td>⚠️<sup>2</sup> ⚠️</td>
-          <td>⚠️<sup>3</sup> ⚠️<sup>3</sup></td>
+          <td><code>node</code><sup>2</sup> 19.7.0</td>
+          <td>⚠️<sup>3</sup> ⚠️</td>
           <td>⚠️<sup>4</sup> ⚠️<sup>4</sup></td>
-          <td>⚠️<sup>4</sup> ⚠️<sup>4</sup></td>
+          <td>N/A<sup>5</sup></td>
+          <td>⚠️ ⚠️</td>
+          <td>⚠️ ⚠️</td>
         </tr>
         <tr>
           <td><code>deno</code> 1.27.2</td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
+          <td>N/A<sup>5</sup></td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
+        </tr>
+        <tr>
+          <td><code>bun</code> 0.5.7</td>
+          <td>⚠️<sup>3</sup> ✅</td>
+          <td>⚠️<sup>4</sup> ⚠️<sup>4</sup></td>
+          <td>N/A<sup>5</sup></td>
+          <td>🚫 🚫</td>
+          <td>🚫 🚫</td>
         </tr>
       </tbody>
       <tbody>
         <tr>
-          <td><code>bun</code> 0.5.7</td>
-          <td>⚠️ ✅<sup>2</sup></td>
-          <td>❌ ❌<sup>3</sup></td>
-          <td>🚫 🚫</td>
-          <td>🚫 🚫</td>
-        </tr>
-        <tr>
-          <td>Vite 4.2.1</td>
-          <td>✅ ❌</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
+          <td>Vite<sup>6</sup> 4.2.1</td>
+          <td>❌ ❌</td>
+          <td>❌ ✅</td>
+          <td>❌ ✅</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
         </tr>
         <tr>
           <td><code>esbuild</code> 0.5.7</td>
@@ -329,25 +311,51 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>❌ ❌</td>
           <td>❌ ❌</td>
           <td>❌ ❌</td>
+          <td>❌ ❌</td>
         </tr>
         <tr>
-          <td>Parcel 2.8.3</td>
+          <td>Parcel<sup>6</sup> 2.8.3</td>
           <td>❌ ❌</td>
           <td>❌ ❌</td>
           <td>❌ ✅</td>
+          <td>❌ ✅</td>
+          <td>❌ ❌</td>
+        </tr>
+        <tr>
+          <td>Rollup 3.20.2</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
+          <td>❌ ❌</td>
+        </tr>
+        <tr>
+          <td>Webpack 5.76.3</td>
+          <td>❌ ❌</td>
+          <td>❌ ✅</td>
+          <td>❌ ✅</td>
+          <td>❌ ❌</td>
           <td>❌ ❌</td>
         </tr>
       </tbody>
     </table>
     <br>
-    <sup>1</sup> Using the flag <code>--experimental-import-meta-resolve</code>
+    <sup>1</sup> Using <code>dom.workers.modules.enabled</code> via <code>about:config</code>
     <br>
-    <sup>2</sup> Only supports <b>asynchronous</b> <code>import.meta.resolve(…)</code> (and
-    synchronous <code>new URL(…, import.meta.url)</code>).
+    <sup>2</sup> Using the flag <code>--experimental-import-meta-resolve</code>
     <br>
-    <sup>3</sup> <code>fetch(…)</code> unsupported for <code>file://</code> URLs.
+    <sup>3</sup> Only supports <b>asynchronous</b> <code>import.meta.resolve(…)</code>
     <br>
-    <sup>4</sup> Requires non-standard workarounds.
+    <sup>4</sup> <code>fetch(…)</code> unsupported for <code>file://</code> URLs
+    <br>
+    <sup>5</sup> Can be loaded as (binary) data with the same caveats as (text-based) JSON.
+    <br>
+    <sup>6</sup> Requires a custom config to build production code that uses relative imports
+    <br>
+    <br>
+    Note: The markers here are not meant to imply that projects have done anything wrong by lacking support. Some of
+    them have to support a wide variety of configurations, and it may not be easy to support ESM-only features. However,
+    this dashboard <b>does</b> serve as a rough measure of how widely usable these resource loading conventions are.
   </section>
 </body>
 

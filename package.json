@@ -1,10 +1,13 @@
 {
   "type": "module",
   "devDependencies": {
-    "esbuild": "^0.17.13"
+    "esbuild": "^0.17.13",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "parcel": "^2.8.3",
+    "rollup": "^3.20.2",
     "vite": "^4.2.1"
   }
 }

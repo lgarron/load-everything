@@ -2,8 +2,11 @@ import { config } from "./config.js";
 
 async function testLoad(resourceType, loadFn) {
   try {
-    if (await loadFn() === true) {
+    const result = await loadFn();
+    if (result === true) {
       console.log("✅", resourceType);
+    } else if (result === null) {
+      console.log("[check elsewhere]", resourceType);
     } else {
       console.error("❌", resourceType);
     }
@@ -48,6 +51,33 @@ async function testLoad(resourceType, loadFn) {
     const jsonPath = new URL("./relative-path/data.json", import.meta.url);
     const response = await fetch(jsonPath);
     return (await response.json())["value"] == "okay";
+  });
+
+  await testLoad("Image (sync import.meta.resolve)", async () => {
+    const imagePath = import.meta.resolve("./relative-path/poster.jpeg");
+    if (globalThis.document) {
+      const img = globalThis.document.body.querySelector("#image-import_meta_resolve").appendChild(document.createElement("img"))
+      img.src = imagePath;
+    }
+    return null;
+  });
+
+  await testLoad("Image (async import.meta.resolve)", async () => {
+    const imagePath = await import.meta.resolve("./relative-path/poster.jpeg");
+    if (globalThis.document) {
+      const img = globalThis.document.body.querySelector("#image-async_import_meta_resolve").appendChild(document.createElement("img"))
+      img.src = imagePath;
+    }
+    return null;
+  });
+
+  await testLoad("Image (new URL)", async () => {
+    const imagePath = new URL("./relative-path/poster.jpeg", import.meta.url);
+    if (globalThis.document) {
+      const img = globalThis.document.body.querySelector("#image-new_URL").appendChild(document.createElement("img"))
+      img.src = imagePath;
+    }
+    return null;
   });
 
   await testLoad("Web worker (sync import.meta.resolve)", async () => {

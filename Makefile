@@ -13,7 +13,7 @@ deploy:
 
 .PHONY: test-browser
 test-browser:
-	open http://localhost:8000; caddy file-server --listen :8000 --browse --root test
+	open http://localhost:8000/; caddy file-server --listen :8000 --browse --root test
 
 .PHONY: test-node
 test-node:
@@ -34,9 +34,27 @@ test-esbuild:
 
 .PHONY: test-vite
 test-vite:
-	npx vite test
+	npx vite build --config vite.config.ts
+	open http://localhost:8000/test-vite/; caddy file-server --listen :8000 --browse --root dist
+	# npx vite test
 
 .PHONY: test-parcel
 test-parcel:
-	npx parcel test/index.html
+	npx parcel build --public-url . --dist-dir "dist/test-parcel" test/index.html
+	open http://localhost:8000/test-parcel/; caddy file-server --listen :8000 --browse --root dist
 
+.PHONY: test-rollup
+test-rollup:
+	npx rollup test/entry.js --format esm -d dist/test-rollup
+	cp test/index.html dist/test-rollup/
+	open http://localhost:8000/test-rollup/; caddy file-server --listen :8000 --browse --root dist
+
+.PHONY: test-webpack
+test-webpack:
+	npx webpack
+	cp test/index.html dist/test-webpack/
+	open http://localhost:8000/test-webpack/; caddy file-server --listen :8000 --browse --root dist
+
+.PHONY: clean
+clean:
+	rm -rf ./parce-cache ./dist

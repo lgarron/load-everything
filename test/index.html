@@ -1,2 +1,35 @@
-<script src="entry.js" type="module"></script>
-Open your JS console to view test results.
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8">
+  <script src="./entry.js" type="module"></script>
+  <style>
+    fieldset {
+      display: inline-block;
+    }
+
+    img {
+      height: 256px;
+    }
+
+  </style>
+</head>
+
+<body>
+  Open your JS console to view test results.
+
+  <br>
+  <fieldset id="image-import_meta_resolve">
+    <summary>Image (sync import.meta.resolve)</summary>
+  </fieldset>
+  <fieldset id="image-async_import_meta_resolve">
+    <summary>Image (async import.meta.resolve)</summary>
+  </fieldset>
+  <fieldset id="image-new_URL">
+    <summary>Image (new URL)</summary>
+  </fieldset>
+
+</body>
+
+</html>
