@@ -1,0 +1,190 @@
+/* From: https://github.com/lgarron/minimal-html-style (v1.0.0) */
+html {
+  font-family: -apple-system, Roboto, Ubuntu, Tahoma, sans-serif;
+  font-size: 1.25rem;
+  padding: 2em;
+  display: grid;
+  justify-content: center;
+
+  --title-color: #011853;
+}
+
+body {
+  width: 100%;
+  max-width: 40em;
+  margin: 0;
+}
+
+/* 
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #000D;
+    color: #EEE;
+  }
+
+  a {
+    color: #669df5;
+  }
+
+  a:visited {
+    color: #af73d5;
+  }
+} */
+
+/********/
+
+html {
+  box-sizing: border-box;
+  min-height: 100%;
+  background: conic-gradient(#F0E1AA 0deg 35deg, #8FC7D3 35deg 145deg, #0BA293 145deg 215deg, #F1D0DB 215deg 325deg, #F0E1AA 325deg 360deg);
+  background-size: 100vw 100vh;
+  background-repeat: repeat;
+  color: var(--title-color);
+}
+
+.title,
+.title a,
+.title a:visited {
+  color: #00256b;
+  font-size: min(10vw, max(10vh, 5vw));
+  font-family: Helvetica, sans-serif;
+  font-weight: 900;
+
+  display: grid;
+  place-content: center;
+}
+
+title-word {
+  display: grid;
+  place-content: center;
+}
+
+title-word.red {
+  color: #F90109;
+}
+
+
+title-word a:not(:hover) {
+  text-decoration: none;
+}
+
+.subtitle {
+  font-size: 1.25em;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1em;
+}
+
+.alternatives {
+  display: inline-block;
+  padding: 1em 0;
+}
+
+hr {
+  height: 0px;
+  border: 1px solid black;
+  margin: 2em auto;
+}
+
+large-spacer {
+  display: block;
+  height: 2em;
+}
+
+section {
+  background: rgba(255, 255, 255, 0.7);
+  display: block;
+  padding: 1em;
+  line-height: 1.3em;
+}
+
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 2px solid black;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 0;
+  text-shadow: 0 0 0.5em white, 0 0 1em white, 0 0 1em white;
+}
+
+h2 a,
+h2 a:visited {
+  color: var(--title-color);
+}
+
+h2 a:not(:hover) {
+  text-decoration: none;
+}
+
+h2:target {
+  background: rgba(255, 255, 255, 1);
+  animation: 1s lighting;
+}
+
+@keyframes lighting {
+  0% {
+    background: linear-gradient(to right in oklab, white, red);
+  }
+
+  10% {
+    background: linear-gradient(to right in oklab, blue, red);
+  }
+
+  20% {
+    background: linear-gradient(to right in oklab, blue, yellow);
+  }
+
+  30% {
+    background: linear-gradient(to right in oklab, green, yellow);
+  }
+
+  40% {
+    background: linear-gradient(to right in oklab, green, rebeccapurple);
+  }
+
+  50% {
+    background: linear-gradient(to right in oklab, orange, rebeccapurple);
+  }
+
+  60% {
+    background: linear-gradient(to right in oklab, orange, beige);
+  }
+
+  60% {
+    background: linear-gradient(to right in oklab, pink, beige);
+  }
+
+  60% {
+    background: linear-gradient(to right in oklab, pink, chartreuse);
+  }
+
+  70% {
+    background: linear-gradient(to right in oklab, aquamarine, chartreuse);
+  }
+
+  85% {
+    background: linear-gradient(to right in oklab, aquamarine, wheat);
+  }
+
+  100% {
+    background: linear-gradient(to right in oklab, white, wheat);
+  }
+}
+
+p {
+  text-align: center;
+}
+
+
+code.example {
+  white-space: pre-line;
+  display: block;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1em;
+  max-width: 80vw;
+}
+
+code.example a {
+  color: white;
+}

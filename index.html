@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8">
+  <title>Load Everything</title>
+  <!-- From: https://github.com/lgarron/minimal-html-style (v1.0.0) -->
+  <meta name="viewport" content="width=device-width, initial-scale=0.75">
+  <link rel="stylesheet" href="./import-everything.css">
+</head>
+
+<body>
+  <div class="title">
+    <title-word class="red">LOAD</title-word>
+    <title-word><a href="#everything">EVERYTHING</a></title-word>
+    <title-word><a href="#everywhere">EVERYWHERE</a></title-word>
+    <title-word><a href="#all-at-once">ALL AT ONCE</a></title-word>
+  </div>
+  <hr>
+  <p class="subtitle">
+    Load resources in JavaScript using code that works in all <s>universes</s> environments, using
+    <a href="#import.meta.resolve"><code>import.meta.resolve(…)</code></a> and friends.
+    <!-- A standard convention for loading
+    <br>
+    <span class="alternatives">modules | CSS | images | web workers | WASM</span>
+    <br>
+    in
+    <br>
+    <span class="alternatives">browsers | <a href="https://nodejs.org/en/about">Node.js</a> | bundlers | <a
+        href="https://deno.land/">deno</a> | <a href="https://bun.sh/">bun</a></span>
+    <br>
+    using standard JavaScript module features. -->
+  </p>
+  <h2 id="everything"><a href="#everything">PART 1<br>EVERYTHING</a></h2>
+  <section>
+    Modern Javascript apps load a variety of resources:
+    <ul>
+      <li>JavaScript (<code>.js</code>)</li>
+      <li>CSS (<code>.css</code>)</li>
+      <li>JSON (<code>.json</code>)</li>
+      <li>Images (<code>.png</code>, <code>.jpeg</code>, <code>.webp</code>, …)</li>
+      <li>Workers (<code>Worker</code>, <code>ServiceWorker</code>, <code>SharedWorker</code>)</li>
+      <li>Web Assembly (<code>.wasm</code>)</li>
+      <li>Arbitrary resources</li>
+    </ul>
+  </section>
+
+  <h2 id="everywhere"><a href="#everywhere">PART 2<br>EVERYWHERE</a></h2>
+  <section>
+    Modern JavaScript apps are now run or processed by a variety of environments:
+    <ul>
+      <li>Browsers</li>
+      <li>Servers (<a href="https://nodejs.org/en/about">Node.js</a> | <a href="https://deno.land/">deno</a> | <a
+          href="https://bun.sh/">bun</a></span>, …)</li>
+      <li>Bundlers (<a href="https://esbuild.github.io/"><code>esbuild</code></a>, <a
+          href="https://vitejs.dev/">Vite</a>, <a href="https://parceljs.org/">Parcel</a>, <a
+          href="https://rollupjs.org/">Rollup</a>, <a href="https://webpack.js.org/"><code>webpack</code></a>, …)</li>
+      <li>Test environments (using <a href="https://playwright.dev/">Playwright</a>, <a
+          href="https://www.npmjs.com/package/puppeteer">Puppeteer</a>, <a
+          href="https://github.com/testing-library/jest-dom"><code>jest-dom</code></a>, …)</li>
+      <li>Server-side rendering</li>
+      <li>…</li>
+    </ul>
+    All the listed examples are compatible with JavaScript module code (&ldquo;ESM&rdquo;), and some of them require it.
+  </section>
+
+  <h2 id="all-at-once"><a href="#all-at-once">PART 3<br>ALL AT ONCE</a></h2>
+  <section>
+    When authoring an app or a library, it is now common to publish JavaScript module code that is meant to run in all
+    environments directly, without any polyfills or other translation. Further, it is also common
+    to publish packages that import or export resource files (like CSS or WASM), either directly
+    or through JavaScript code.
+    <br>
+    <br>
+    It is time-consuming to author and debug multiple <s>life</s> code paths for
+    different environments, which makes it <b>difficult</b> to publish a reliable library with such resources.
+    <br>
+    <br>Further, if
+    you publish a library, other developers may run
+    it through other bundlers and/or re-publish your code, possibly passing through multiple bundlers. There is
+    currently no implementation that is handled consistently by all bundlers, which means it is actually <b>impossible
+      to write
+      code that always works</b> at the moment.
+    <br>
+    <br>Therefore, it is important for such authors to have a standard way to reference and import a given resource, so
+    that a single implementation works across <b>all environments at once</b>.
+  </section>
+
+  <h2 id="import.meta.resolve"><a href="#import.meta.resolve">PART 4<br>import.meta.resolve</a></h2>
+  <section>
+    When code and resources for in a JavaScript codebase are stored in a folder structure, there is now a standard way
+    to refer to
+    <b>resolve</b> the path of a relative resource, which can then be loaded in the appropriate way: <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve"><code>import.meta.resolve(…)</code></a>
+    <br><br>
+    Although there is special syntax for some resources (such as <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">static import</a>),
+    this is by far the most flexible option. The following examples work in all modern browsers already:
+    <br><br>
+    <code class="example">// JS
+const libPath = <wbr><b>import.meta.resolve</b>(<wbr>"./lib/dynamic.js");
+const lib = await import(libPath);
+
+// JSON
+const dataPath = <wbr><b>import.meta.resolve</b>(<wbr>"./data.json");
+const data = <wbr>await (await fetch(<wbr>dataPath)).json();
+console.log(data);
+
+// CSS
+const cssPath = <wbr><b>import.meta.resolve</b>(<wbr>"./themes/solarized.css");
+const link = <wbr>document.body<wbr>.appendChild(<wbr>document<wbr>.createElement(<wbr>"link"));
+link.rel = <wbr>"stylesheet";
+link.href = <wbr>cssPath;
+
+// Image
+const imagePath = <wbr><b>import.meta.resolve</b>(<wbr>"./icons/errorsaurus.svg");
+document.body<wbr>.appendChild(<wbr>document<wbr>.createElement(<wbr>"img"))<wbr>.src = <wbr>imagePath;
+
+// Web worker
+const workerPath = <wbr><b>import.meta.resolve</b>(<wbr>"./client/worker.js");
+const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: "module" });
+worker<wbr>.postMessage("hi");
+
+// WASM
+const wasmPath = <wbr><b>import.meta.resolve</b>(<wbr>"./code.wasm");
+const wasmModule = WebAssembly<wbr>.compileStreaming(<wbr>fetch(wasmPath), <wbr>/* imports */);
+console.log(<wbr>wasmModule<wbr>.exports<wbr>.foo());
+
+// Arbitrary resources
+const resourcePath = <wbr><b>import.meta.resolve</b>(<wbr>"./resource");
+const response = <wbr>await fetch(<wbr>resourcePath);
+// binary
+console.log(<wbr>await response<wbr>.arrayBuffer());
+// text
+console.log(<wbr>await response<wbr>.text());
+</code>
+    <br>
+    It is also possible to use this to import CSS and JSON directly in browsers that <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#browser_compatibility">support
+      import assertions</a>:
+    <br><br>
+    <code class="example">// JSON
+const dataPath = <wbr><b>import.meta.resolve</b>(<wbr>"./data.json");
+const data = await import(<wbr>dataPath, { <wbr>assert: { <wbr>type: "json" } });
+console.log(data);
+
+// <a href="https://web.dev/css-module-scripts/#dynamically-imported-stylesheets">CSS</a>
+const cssPath = <wbr><b>import.meta.resolve</b>(<wbr>"./themes/solarized.css");
+const cssModule = await import(<wbr>cssPath, { <wbr>assert: { <wbr>type: "css" } });
+document<wbr>.adoptedStyleSheets = [<wbr>cssModule.default];
+</code>
+    <br>
+    When bundlers process JavaScript code and other resources in a way that can
+    move them into different folders than originally, they should look for
+    <b><code>import.meta.resolve(…)</code></b>
+    calls that use relative paths (i.e. strings that begin with <code>./</code> or <code>../</code>), and update such
+    calls to any new relative path.
+  </section>
+
+  <h2 id="new-url"><a href="#new-url">PART 5<br>new URL</a></h2>
+  <section>
+    Unfortunately, <code>import.meta.url(…)</code> is not implemented in all environments yet, and is <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve#not_an_ecmascript_feature">not
+      technically
+      specified as part of JavaScript</a>.
+    <br><br>
+    However, many environments support similar functionality using the <code>URL</code> constructor, with
+    <code>import.meta.url</code> as the second parameter:
+    <br>
+    <br>
+    <code class="example">const workerPath = <wbr><b>new URL</b>(<wbr>"./client/worker.js", <wbr><b>import.meta.url</b>)<wbr>.href;
+const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
+</code>
+    <br>
+    For more information, consult <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve#comparison_with_new_url">this
+      comparison</a>.
+    <br>
+    <br>
+    Similar to <code>import.meta.resolve(…)</code>, when bundlers process JavaScript code and other resources in a way
+    that can
+    move them into different folders than originally, they should look for
+    <b><code>new URL(…, import.meta.url)</code></b>
+    calls that use relative paths for the first argument (i.e. strings that begin with <code>./</code> or
+    <code>../</code>), and update such
+    calls to any new relative path.
+    <br>
+    <br>
+    Additionally, it can be useful for bundlers to rewrite <code>import.meta.resolve(…)</code> to
+    <code>new URL(…, import.meta.url).href</code> when outputting code to
+    environments that may not support the former, particularly if the code may
+    be used by other bundlers that do not support it yet. However, the ecosystem will reach a reliable
+    equilibrium once all major tools preserve <code>import.meta.resolve(…)</code>
+    by default.
+  </section>
+
+  <h2 id="static-imports"><a href="#static-imports">PART 6<br>Static imports</a></h2>
+  <section>
+    In all JavaScript module environments, it is possible to import additional JavaScript using a <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">static
+      <code>import</code>
+      declaration</a>:
+    <br>
+    <br>
+    <code class="example">import { name } from "./lib/dynamic.js";</code>
+    <br>
+    There are also proposed standards for static import of <a
+      href="https://web.dev/css-module-scripts/#import-assertions-whats-with-the-assert">CSS</a> and <a
+      href="https://v8.dev/features/import-assertions">JSON</a> in JavaScript using import assertions, which are
+    available in some
+    environments. However:
+    <ul>
+      <li>Static import assertions are still not supported in all browsers.</li>
+      <li>Transforming them into <code>fetch</code>-based backwards-compatible code requires <a
+          href="https://v8.dev/features/top-level-await">top-level <code>await</code></a>, which can be <a
+          href="https://github.com/evanw/esbuild/issues/253#issuecomment-768842454">challenging for
+          bundlers to handle correctly</a>.
+      </li>
+      <li>There are no in-progress standards to support a similar import of
+        images, worker paths, or WASM code.</li>
+      <li>It is unclear if the syntax will
+        handle arbitrary resource imports in the future.</li>
+    </ul>
+    Therefore, it is still valuable to support
+    <code>import.meta.resolve(…)</code> and <code>new URL(…, import.meta.url)</code> for code that can handle all these
+    use cases, <b>today and
+      into the future</b>.
+  </section>
+</body>
+
+</html>
