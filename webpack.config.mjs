@@ -1,4 +1,5 @@
 export default {
+  mode: "production",
   entry: {
     "entry": "./test/entry.js", "entry-verbose": "./test/entry-verbose.js"
   },

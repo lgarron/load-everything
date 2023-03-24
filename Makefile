@@ -32,7 +32,7 @@ test-bun:
 .PHONY: test-esbuild
 test-esbuild:
 	npx esbuild --bundle --format=esm --target=es2020 --outdir=dist/test-esbuild test/entry.js test/entry-verbose.js
-	deno run --allow-read ./dist/test-esbuild/entry.js || echo "deno failed"
+	-deno run --allow-read ./dist/test-esbuild/entry.js
 	./script/serve.fish esbuild copy-html
 
 .PHONY: test-vite
