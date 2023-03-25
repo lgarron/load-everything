@@ -113,9 +113,12 @@ function initSync(module) {
     return finalizeInit(instance, module);
 }
 
-async function init(input) {
+async function init(verbose, input) {
     if (typeof input === 'undefined') {
         input = await import.meta.resolve('./hello_wasm_bg.wasm');
+    }
+    if (verbose) {
+        console.info("📄 input", input)
     }
     const imports = getImports();
 
