@@ -256,11 +256,11 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>✅ ✅</td>
         </tr>
         <tr>
-          <td>Firefox<sup>2</sup> 113</td>
+          <td>Firefox 113</td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
           <td>✅ ✅</td>
-          <td>✅ ✅</td>
+          <td>✅<sup>1</sup> ✅<sup>1</sup></td>
           <td>✅ ✅</td>
         </tr>
         <tr>
@@ -350,7 +350,9 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
       </tbody>
     </table>
     <br>
-    <sup>1</sup> Using <code>dom.workers.modules.enabled</code> via <code>about:config</code>
+    <sup>1</sup> Requires <code>dom.workers.modules.enabled</code> via
+    <code>about:config</code> in order to run module workers. Classic workers are available in Firefox stable without a
+    flag.
     <br>
     <sup>2</sup> Using the flag <code>--experimental-import-meta-resolve</code>
     <br>
