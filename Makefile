@@ -1,5 +1,5 @@
 DEPLOY_SOURCE_PATH = ./
-DEPLOY_SITE_PATH   = garron.net/temp/load-everything/
+DEPLOY_SITE_PATH   = loadeverything.net/
 DEPLOY_SFTP_PATH   = "lgarron@towns.dreamhost.com:~/${DEPLOY_SITE_PATH}"
 
 .PHONY: deploy
