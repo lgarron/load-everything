@@ -235,10 +235,11 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
       <li>❌ Does not work</li>
       <li>🚫 Unsupported runtime feature</li>
     </ul>
-    <table>
+    <table class="comparison">
       <thead>
         <tr>
           <td>Environment</td>
+          <td>Uses</td>
           <td>JavaScript</td>
           <td>JSON</td>
           <td>Image</td>
@@ -248,106 +249,119 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
       </thead>
       <tbody>
         <tr>
-          <td>Chromium 111</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
+          <td>Chromium<br>111</td>
+          <td><a href="https://v8.dev/">V8</a></td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
         </tr>
         <tr>
-          <td>Firefox 113</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
+          <td>Firefox<br>113</td>
+          <td><a href="https://spidermonkey.dev/">Spider<wbr>Monkey</a></td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
           <td>✅<sup>1</sup> ✅<sup>1</sup></td>
-          <td>✅ ✅</td>
+          <td>✅&nbsp;✅</td>
         </tr>
         <tr>
-          <td>Safari 16.4</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
+          <td>Safari<br>16.4</td>
+          <td><a href="https://developer.apple.com/documentation/javascriptcore">JavaScript<wbr>Core</a>
+          </td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
         </tr>
       </tbody>
       <tbody>
         <tr>
-          <td><a href="https://nodejs.org/en"><code>node</code></a><sup>2</sup> 19.7.0</td>
-          <td>⚠️<sup>3</sup> ✅</td>
-          <td>⚠️<sup>4</sup> ⚠️<sup>4</sup></td>
+          <td><a href="https://nodejs.org/en"><code>node</code></a><sup>2</sup><br>19.7.0</td>
+          <td>V8</td>
+          <td>⚠️<sup>3</sup>&nbsp;✅</td>
+          <td>⚠️<sup>4</sup>&nbsp;⚠️<sup>4</sup></td>
           <td>N/A<sup>5</sup></td>
           <td>⚠️ ⚠️</td>
-          <td>⚠️<sup>4</sup> ⚠️<sup>4</sup></td>
+          <td>⚠️<sup>4</sup>&nbsp;⚠️<sup>4</sup></td>
         </tr>
         <tr>
-          <td><a href="https://deno.land/"><code>deno</code></a> 1.27.2</td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
+          <td><a href="https://deno.land/"><code>deno</code></a><br>1.27.2</td>
+          <td>V8</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
           <td>N/A<sup>5</sup></td>
-          <td>✅ ✅</td>
-          <td>✅ ✅</td>
+          <td>✅&nbsp;✅</td>
+          <td>✅&nbsp;✅</td>
         </tr>
         <tr>
-          <td><a href="https://bun.sh/"><code>bun</code></a> 0.5.7</td>
-          <td>⚠️<sup>3</sup> ✅</td>
-          <td>⚠️<sup>4</sup> ⚠️<sup>4</sup></td>
+          <td><a href="https://bun.sh/"><code>bun</code></a><br>0.5.7</td>
+          <td>JavaScript<wbr>Core</td>
+          <td>⚠️<sup>3</sup>&nbsp;✅</td>
+          <td>⚠️<sup>4</sup>&nbsp;⚠️<sup>4</sup></td>
           <td>N/A<sup>5</sup></td>
-          <td>🚫 🚫</td>
-          <td>🚫 🚫</td>
+          <td>🚫&nbsp;🚫</td>
+          <td>🚫&nbsp;🚫</td>
         </tr>
       </tbody>
       <tbody>
         <tr>
-          <td><a href="https://esbuild.github.io/"><code>esbuild</code></a> 0.5.7</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
+          <td><a href="https://esbuild.github.io/"><code>esbuild</code></a><br>0.5.7</td>
+          <td></td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://rollupjs.org/">Rollup</a> 3.20.2</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
+          <td><a href="https://rollupjs.org/">Rollup</a><br>3.20.2</td>
+          <td></td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://webpack.js.org/">Webpack</a> 5.76.3</td>
-          <td>❌ ❌</td>
-          <td>❌ ✅</td>
-          <td>❌ ✅</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
+          <td><a href="https://webpack.js.org/">Webpack</a><br>5.76.3</td>
+          <td></td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;✅</td>
+          <td>❌&nbsp;✅</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://swc.rs/docs/usage/bundling"><code>swcpack</code></a> 0.1.62</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
+          <td><a href="https://swc.rs/docs/usage/bundling"><code>swcpack</code></a><br>0.1.62</td>
+          <td></td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://parceljs.org/">Parcel</a><sup>6</sup> 2.8.3<br><small>Uses swc</small></td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
-          <td>❌ ✅</td>
-          <td>❌ ✅</td>
-          <td>❌ ❌</td>
+          <td><a href="https://parceljs.org/">Parcel</a><sup>6</sup><br>2.8.3</a></td>
+          <td><code>swc</code></td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;✅</td>
+          <td>❌&nbsp;✅</td>
+          <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://vitejs.dev/">Vite</a><sup>6</sup> 4.2.1<br><small><a
-                href="https://vitejs.dev/guide/why.html#why-not-bundle-with-esbuild">Uses Rollup and
-                <code>esbuild</code></a></small></td>
-          <td>❌ ❌</td>
-          <td>❌ ✅</td>
-          <td>❌ ✅</td>
-          <td>❌ ❌</td>
-          <td>❌ ❌</td>
+          <td><a href="https://vitejs.dev/">Vite</a><sup>6</sup><br>4.2.1</td>
+          <td>Rollup and<br>
+            <code>esbuild</code>
+          </td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;✅</td>
+          <td>❌&nbsp;✅</td>
+          <td>❌&nbsp;❌</td>
+          <td>❌&nbsp;❌</td>
         </tr>
       </tbody>
     </table>

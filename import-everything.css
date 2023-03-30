@@ -192,6 +192,9 @@ code.example a {
 table {
   width: 100%;
   border-collapse: collapse;
+  border: var(--thick-border) solid rgba(0, 0, 0, 0.8);
+
+  --thick-border: 4px;
 }
 
 thead {
@@ -205,5 +208,13 @@ td {
 }
 
 tbody {
-  border-top: 5px solid rgba(0, 0, 0, 0.8);
+  border-top: var(--thick-border) solid rgba(0, 0, 0, 0.8);
+}
+
+table.comparison td:nth-child(2) {
+  border-right-width: var(--thick-border);
+}
+
+table.comparison tbody td:nth-child(2) {
+  font-size: smaller;
 }
