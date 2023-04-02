@@ -33,33 +33,33 @@ test-bun:
 test-esbuild:
 	npx esbuild --bundle --format=esm --target=es2020 --outdir=dist/test-esbuild test/entry.js test/entry-verbose.js
 	-deno run --allow-read ./dist/test-esbuild/entry.js
-	./script/serve.fish esbuild copy-html
+	./script/serve.bash esbuild copy-html
 
 .PHONY: test-vite
 test-vite:
 	npx vite build --config vite.config.ts
-	./script/serve.fish vite
+	./script/serve.bash vite
 
 .PHONY: test-parcel
 test-parcel:
 	# Note: Parcel claims to write `dist/test-parcel/verbose/index.html` but actually doesn't. 🤷
 	npx parcel build --public-url . --dist-dir "dist/test-parcel" test/index.html test/verbose/index.html
-	./script/serve.fish parcel
+	./script/serve.bash parcel
 
 .PHONY: test-rollup
 test-rollup:
 	npx rollup test/entry.js --format esm -d dist/test-rollup
-	./script/serve.fish rollup copy-html
+	./script/serve.bash rollup copy-html
 
 .PHONY: test-webpack
 test-webpack:
 	npx webpack
-	./script/serve.fish webpack copy-html
+	./script/serve.bash webpack copy-html
 
 .PHONY: test-swcpack
 test-swcpack:
 	npx spack --config ./script/swcpack/spack.config.js
-	./script/serve.fish swcpack copy-html
+	./script/serve.bash swcpack copy-html
 
 .PHONY: clean
 clean:
