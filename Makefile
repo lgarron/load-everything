@@ -15,7 +15,7 @@ deploy:
 
 .PHONY: test-browser
 test-browser:
-	open http://localhost:8000/; caddy file-server --listen :8000 --browse --root test
+	npx http-server --port 8000 test
 
 .PHONY: test-node
 test-node:

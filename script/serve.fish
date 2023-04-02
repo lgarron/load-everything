@@ -13,4 +13,4 @@ if test "$COPY_ARG" = "copy-html"
 end
 
 open "http://localhost:8000/test-"$BUNDLER/
-caddy file-server --listen :8000 --browse --root dist
+npx http-server --port 8000 dist
