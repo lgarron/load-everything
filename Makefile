@@ -1,3 +1,6 @@
+.PHONY: default
+default: test-browser
+
 DEPLOY_SOURCE_PATH = ./
 DEPLOY_SITE_PATH   = loadeverything.net/
 DEPLOY_SFTP_PATH   = "lgarron@towns.dreamhost.com:~/${DEPLOY_SITE_PATH}"
