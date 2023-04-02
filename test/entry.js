@@ -7,7 +7,7 @@ async function testLoad(resourceType, loadFn) {
     if (result === true) {
       console.log("✅", resourceType);
     } else if (result === null) {
-      console.log("[check elsewhere]", resourceType);
+      console.log("[Look in the DOM]", resourceType);
     } else {
       console.error("❌", resourceType);
     }
