@@ -127,6 +127,11 @@ async function init(verbose, input) {
             if (!(e instanceof TypeError)) {
                 throw e;
             }
+            // `node`'s `import.meta.resolve` returns `file://` URLs.
+            // `node`'s `fetch` doesn't support `file://` yet, so we have to use `readFile(…)`, which... doens't accept `file:` URLs. So we strip the prefix if needed.
+            if (input.startsWith?.("file:")) {
+                input = new URL(input).pathname;
+            }
             input = await (await import(node_fs_promises_unmangled())).readFile(input);
         }
     }
