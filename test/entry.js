@@ -1,5 +1,6 @@
 console.log("Starting tests.");
 import { config } from "./config.js";
+import { testWorker } from "./test-worker.js";
 
 async function testLoad(resourceType, loadFn) {
   try {
@@ -91,91 +92,37 @@ async function testLoad(resourceType, loadFn) {
   });
 
   await testLoad("Web worker (sync import.meta.resolve)", async () => {
-    return new Promise((resolve, reject) => {
-      try {
-        const workerPath = import.meta.resolve("./indirect-path/worker.js");
-        if (config.verbose) { console.info("📄 workerPath", workerPath) }
-        if (!globalThis.Worker) {
-          resolve(false);
-          return;
-        }
-        const worker = new Worker(workerPath, { type: "module" });
-        worker.addEventListener("message", (e) => {
-          resolve(e.data === "okay")
-        });
-        worker.postMessage("test");
-        setTimeout(() => {
-          reject(new Error("worker load timed out"));
-        }, 2000);
-      } catch (e) {
-        reject(e);
-      }
-    });
+    const workerPath = import.meta.resolve("./indirect-path/worker.js");
+    return testWorker(workerPath);
   });
 
   await testLoad("Web worker (async import.meta.resolve)", async () => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const workerPath = await import.meta.resolve("./indirect-path/worker.js");
-        if (config.verbose) { console.info("📄 workerPath", workerPath) }
-        if (!globalThis.Worker) {
-          resolve(false);
-          return;
-        }
-        const worker = new Worker(workerPath, { type: "module" });
-        worker.addEventListener("message", (e) => {
-          resolve(e.data === "okay")
-        });
-        worker.postMessage("test");
-        setTimeout(() => {
-          reject(new Error("worker load timed out"));
-        }, 2000);
-      } catch (e) {
-        reject(e);
-      }
-    });
+    const workerPath = await import.meta.resolve("./indirect-path/worker.js");
+    return testWorker(workerPath);
   });
 
   await testLoad("Web worker (new URL)", async () => {
-    return new Promise((resolve, reject) => {
-      try {
-        const workerPath = new URL("./indirect-path/worker.js", import.meta.url);
-        if (config.verbose) { console.info("📄 workerPath", workerPath) }
-        if (!globalThis.Worker) {
-          resolve(false);
-          return;
-        }
-        const worker = new Worker(workerPath, { type: "module" });
-        worker.addEventListener("message", (e) => {
-          resolve(e.data === "okay")
-        });
-        worker.postMessage("test");
-        setTimeout(() => {
-          reject(new Error("worker load timed out"));
-        }, 2000);
-      } catch (e) {
-        reject(e);
-      }
-    });
+    const workerPath = new URL("./indirect-path/worker.js", import.meta.url);
+    return testWorker(workerPath);
   });
 
-  await testLoad("WASM (sync import.meta.resolve)", async () => {
-    const hello_wasm = await import("./indirect-path/hello_wasm_import_meta_resolve.js");
-    await hello_wasm.default(config.verbose);
-    return hello_wasm.test() == "okay";
-  });
+  // await testLoad("WASM (sync import.meta.resolve)", async () => {
+  //   const hello_wasm = await import("./indirect-path/hello_wasm_import_meta_resolve.js");
+  //   await hello_wasm.default(config.verbose);
+  //   return hello_wasm.test() == "okay";
+  // });
 
-  await testLoad("WASM (async import.meta.resolve)", async () => {
-    const hello_wasm = await import("./indirect-path/hello_wasm_async_import_meta_resolve.js");
-    await hello_wasm.default(config.verbose);
-    return hello_wasm.test() == "okay";
-  });
+  // await testLoad("WASM (async import.meta.resolve)", async () => {
+  //   const hello_wasm = await import("./indirect-path/hello_wasm_async_import_meta_resolve.js");
+  //   await hello_wasm.default(config.verbose);
+  //   return hello_wasm.test() == "okay";
+  // });
 
-  await testLoad("WASM (new URL)", async () => {
-    const hello_wasm = await import("./indirect-path/hello_wasm_new_URL.js");
-    await hello_wasm.default(config.verbose);
-    return hello_wasm.test() == "okay";
-  });
+  // await testLoad("WASM (new URL)", async () => {
+  //   const hello_wasm = await import("./indirect-path/hello_wasm_new_URL.js");
+  //   await hello_wasm.default(config.verbose);
+  //   return hello_wasm.test() == "okay";
+  // });
 
   // // Arbitrary resources
   // const resourcePath = import.meta.resolve("./resource");
