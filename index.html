@@ -233,7 +233,6 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
       <li>✅ Works by default</li>
       <li>⚠️ Requires non-standard workaround (that does not break compat with other environments)</li>
       <li>❌ Does not work</li>
-      <li>🚫 Unsupported runtime feature</li>
     </ul>
     <table class="comparison">
       <thead>
@@ -302,8 +301,8 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>⚠️<sup>3</sup>&nbsp;✅</td>
           <td>✅<sup>4</sup>&nbsp;✅<sup>4</sup></td>
           <td>N/A<sup>5</sup></td>
-          <td>🚫&nbsp;🚫</td>
-          <td>🚫&nbsp;🚫</td>
+          <td>N/A<sup>6</sup></td>
+          <td>N/A<sup>6</sup></td>
         </tr>
       </tbody>
       <tbody>
@@ -344,7 +343,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://parceljs.org/">Parcel</a><sup>6</sup><br>2.8.3</a></td>
+          <td><a href="https://parceljs.org/">Parcel</a><sup>7</sup><br>2.8.3</a></td>
           <td><code>swc</code></td>
           <td>❌&nbsp;❌</td>
           <td>❌&nbsp;❌</td>
@@ -353,7 +352,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://vitejs.dev/">Vite</a><sup>6</sup><br>4.2.1</td>
+          <td><a href="https://vitejs.dev/">Vite</a><sup>7</sup><br>4.2.1</td>
           <td>Rollup and<br>
             <code>esbuild</code>
           </td>
@@ -378,7 +377,9 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
     <br>
     <sup>5</sup> Can be loaded as (binary) data with the same caveats as (text-based) JSON.
     <br>
-    <sup>6</sup> Requires a custom config to build production code that uses relative imports
+    <sup>6</sup> The relevant feature is not (yet) supported by the engine.
+    <br>
+    <sup>7</sup> Requires a custom config to build production code that uses relative imports
     <br>
     <br>
     Note: The markers here are not meant to imply that projects have done anything wrong by lacking support. Some of
