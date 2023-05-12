@@ -19,7 +19,7 @@ async function fileURL(
 
 async function loadTextNode(
   import_meta_resolve_result: ImportMetaResolveResult,
-) {
+): Promise<string> {
   const readFile = await readFileFunction();
   return readFile(await fileURL(import_meta_resolve_result), "utf-8");
 }
