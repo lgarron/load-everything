@@ -282,10 +282,10 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td><a href="https://nodejs.org/en"><code>node</code></a><sup>2</sup><br>20.0.0</td>
           <td>V8</td>
           <td>✅&nbsp;✅</td>
-          <td>⚠️<sup>4</sup>&nbsp;⚠️<sup>4</sup></td>
+          <td>✅<sup>4</sup>&nbsp;✅<sup>4</sup></td>
           <td>N/A<sup>5</sup></td>
           <td>✅ ✅</td>
-          <td>⚠️<sup>4</sup>&nbsp;⚠️<sup>4</sup></td>
+          <td>✅<sup>4</sup>&nbsp;✅<sup>4</sup></td>
         </tr>
         <tr>
           <td><a href="https://deno.land/"><code>deno</code></a><br>1.27.2</td>
@@ -300,7 +300,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td><a href="https://bun.sh/"><code>bun</code></a><br>0.5.7</td>
           <td>JavaScript<wbr>Core</td>
           <td>⚠️<sup>3</sup>&nbsp;✅</td>
-          <td>⚠️<sup>4</sup>&nbsp;⚠️<sup>4</sup></td>
+          <td>✅<sup>4</sup>&nbsp;✅<sup>4</sup></td>
           <td>N/A<sup>5</sup></td>
           <td>🚫&nbsp;🚫</td>
           <td>🚫&nbsp;🚫</td>
@@ -374,7 +374,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
     <br>
     <sup>3</sup> Only supports <b>asynchronous</b> <code>import.meta.resolve(…)</code>
     <br>
-    <sup>4</sup> <code>fetch(…)</code> unsupported for <code>file://</code> URLs
+    <sup>4</sup> Using <code>readFile</code> from <code>node:fs/promises</code> instead of <code>fetch(…)</code>.
     <br>
     <sup>5</sup> Can be loaded as (binary) data with the same caveats as (text-based) JSON.
     <br>

@@ -61,6 +61,30 @@ async function testLoad(resourceType, loadFn) {
     return (await response.json())["value"] == "okay";
   });
 
+  await testLoad("JSON readFile (sync import.meta.resolve)", async () => {
+    const jsonPath = import.meta.resolve("./relative-path/data.json");
+    if (config.verbose) { console.info("📄 jsonPath", jsonPath) };
+    const { readFile } = await import("node:fs/promises");
+    const response = await readFile(new URL(jsonPath));
+    return (await JSON.parse(response))["value"] == "okay";
+  });
+
+  await testLoad("JSON readFile (async import.meta.resolve)", async () => {
+    const jsonPath = await import.meta.resolve("./relative-path/data.json");
+    if (config.verbose) { console.info("📄 jsonPath", jsonPath) };
+    const { readFile } = await import("node:fs/promises");
+    const response = await readFile(new URL(jsonPath, "file://"));
+    return (await JSON.parse(response))["value"] == "okay";
+  });
+
+  await testLoad("JSON readFile (new URL)", async () => {
+    const jsonPath = new URL("./relative-path/data.json", import.meta.url);
+    if (config.verbose) { console.info("📄 jsonPath", jsonPath) };
+    const { readFile } = await import("node:fs/promises");
+    const response = await readFile(jsonPath);
+    return (await JSON.parse(response))["value"] == "okay";
+  });
+
   await testLoad("Image (sync import.meta.resolve)", async () => {
     const imagePath = import.meta.resolve("./relative-path/poster.jpeg");
     if (config.verbose) { console.info("📄 imagePath", imagePath) }
