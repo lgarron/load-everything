@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": false,
+  },
+  "include": [
+    "src/index.ts"
+  ]
+}

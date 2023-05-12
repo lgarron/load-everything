@@ -1,0 +1,35 @@
+{
+  "name": "load-everything",
+  "description": "Load JSON, text, and more — across all JS environments.",
+  "author": "Lucas Garron <code@garron.net> (https://garron.net/)",
+  "repository": "github:lgarron/load-everything",
+  "bugs": {
+    "url": "https://github.com/lgarron/load-everything/issues"
+  },
+  "license": "MIT",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^20.1.3"
+  },
+  "devDependencies": {
+    "barely-a-dev-server": "^0.4.12",
+    "esbuild": "^0.16.17",
+    "rome": "^12.0.0",
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "dev": "node script/dev.js",
+    "build": "node script/build.js",
+    "lint": "npx rome check ./src",
+    "format": "npx rome format ./src"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  }
+}
