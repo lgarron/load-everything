@@ -4,11 +4,12 @@ type ImportMetaResolveResult = string | URL | Promise<string> | Promise<URL>;
 
 export async function dynamicImport(
   import_meta_resolve_result: ImportMetaResolveResult,
+  import_options: ImportCallOptions,
   // rome-ignore lint/suspicious/noExplicitAny: The imported code could be `any`thing.
 ): Promise<any> {
   const awaitedAsString = (await import_meta_resolve_result) as string;
   // In theory we should convert `URL` to a string. But all environments accept `URL`.
-  return await import(awaitedAsString);
+  return await import(awaitedAsString, import_options);
 }
 
 async function fileURL(

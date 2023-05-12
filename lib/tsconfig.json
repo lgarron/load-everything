@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es2022",
+    "module": "ESNext",
     "declaration": true,
     "declarationDir": "dist",
     "emitDeclarationOnly": false,
