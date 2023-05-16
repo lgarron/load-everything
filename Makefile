@@ -37,7 +37,7 @@ test-bun: node_modules
 
 .PHONY: test-esbuild
 test-esbuild: node_modules
-	npx esbuild --bundle --format=esm --target=es2020 --outdir=dist/test-esbuild test/entry.js test/entry-verbose.js
+	npx esbuild --bundle --format=esm --target=es2020 --external:node:* --outdir=dist/test-esbuild test/entry.js test/entry-verbose.js
 	-deno run --allow-read ./dist/test-esbuild/entry.js
 	./script/serve.bash esbuild copy-html
 
@@ -66,6 +66,11 @@ test-webpack: node_modules
 test-swcpack: node_modules
 	npx spack --config ./script/swcpack/spack.config.js
 	./script/serve.bash swcpack copy-html
+
+.PHONY: test-bun-build
+test-bun-build: node_modules
+	bun build --format esm --outdir=dist/test-bun-build test/entry.js test/entry-verbose.js
+	./script/serve.bash bun-build copy-html
 
 .PHONY: clean
 clean:

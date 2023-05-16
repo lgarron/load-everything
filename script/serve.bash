@@ -3,7 +3,7 @@
 set -euo pipefail
 
 BUNDLER=${1}
-COPY_ARG=${2:""}
+COPY_ARG=${2:-""}
 
 DIST_DIR="dist/test-${BUNDLER}"
 
