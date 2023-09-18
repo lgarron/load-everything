@@ -265,7 +265,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>✅&nbsp;✅</td>
           <td>✅&nbsp;✅</td>
           <td>✅&nbsp;✅</td>
-          <td>✅<sup>1</sup> ✅<sup>1</sup></td>
+          <td>✅&nbsp;✅</td>
           <td>✅&nbsp;✅</td>
         </tr>
         <tr>
@@ -284,31 +284,31 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td colspan="7">Runtimes</td>
         </tr>
         <tr>
-          <td><a href="https://nodejs.org/en"><code>node</code></a><sup>2</sup><br>20.0.0</td>
+          <td><a href="https://nodejs.org/en"><code>node</code></a><br>20.6.0</td>
           <td>V8</td>
           <td>✅&nbsp;✅</td>
-          <td>✅<sup>4</sup>&nbsp;✅<sup>4</sup></td>
-          <td>N/A<sup>5</sup></td>
+          <td>✅&nbsp;✅</td>
+          <td>&mdash;</td>
           <td>✅ ✅</td>
-          <td>✅<sup>4</sup>&nbsp;✅<sup>4</sup></td>
+          <td>✅&nbsp;✅</td>
         </tr>
         <tr>
           <td><a href="https://deno.land/"><code>deno</code></a><br>1.27.2</td>
           <td>V8</td>
           <td>✅&nbsp;✅</td>
           <td>✅&nbsp;✅</td>
-          <td>N/A<sup>5</sup></td>
+          <td>&mdash;</td>
           <td>✅&nbsp;✅</td>
           <td>✅&nbsp;✅</td>
         </tr>
         <tr>
           <td><a href="https://bun.sh/"><code>bun</code></a><br>0.5.7</td>
           <td>JavaScript<wbr>Core</td>
-          <td>⚠️<sup>3</sup>&nbsp;✅</td>
-          <td>✅<sup>3</sup>,<sup>4</sup>&nbsp;✅<sup>4</sup></td>
-          <td>N/A<sup>5</sup></td>
-          <td>N/A<sup>6</sup></td>
-          <td>N/A<sup>6</sup></td>
+          <td>⚠️<sup>1</sup>&nbsp;✅</td>
+          <td>⚠️<sup>1</sup>&nbsp;✅</td>
+          <td>&mdash;</td>
+          <td>⚠️<sup>1</sup>&nbsp;✅</td>
+          <td>⚠️<sup>1</sup>&nbsp;✅</td>
         </tr>
       </tbody>
       <tbody>
@@ -352,7 +352,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://parceljs.org/">Parcel</a><sup>7</sup><br>2.8.3</a></td>
+          <td><a href="https://parceljs.org/">Parcel</a><sup>3</sup><br>2.8.3</a></td>
           <td><code>swc</code></td>
           <td>❌&nbsp;❌</td>
           <td>❌&nbsp;❌</td>
@@ -361,7 +361,7 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
           <td>❌&nbsp;❌</td>
         </tr>
         <tr>
-          <td><a href="https://vitejs.dev/">Vite</a><sup>7</sup><br>4.2.1</td>
+          <td><a href="https://vitejs.dev/">Vite</a><sup>3</sup><br>4.2.1</td>
           <td>Rollup and<br>
             <code>esbuild</code>
           </td>
@@ -374,21 +374,9 @@ const worker = <wbr>new Worker(<wbr>workerPath, <wbr>{ type: <wbr>"module" });
       </tbody>
     </table>
     <br>
-    <sup>1</sup> Requires <code>dom.workers.modules.enabled</code> via
-    <code>about:config</code> in order to run module workers. Classic workers are available in Firefox stable without a
-    flag.
+    <sup>1</sup> Only supports <b>asynchronous</b> <code>import.meta.resolve(…)</code>
     <br>
-    <sup>2</sup> Using the flag <code>--experimental-import-meta-resolve</code>
-    <br>
-    <sup>3</sup> Only supports <b>asynchronous</b> <code>import.meta.resolve(…)</code>
-    <br>
-    <sup>4</sup> Using <code>readFile</code> from <code>node:fs/promises</code> instead of <code>fetch(…)</code>.
-    <br>
-    <sup>5</sup> Can be loaded as (binary) data with the same caveats as (text-based) JSON.
-    <br>
-    <sup>6</sup> The relevant feature is not (yet) supported by the engine.
-    <br>
-    <sup>7</sup> Requires a custom config to build production code that uses relative imports
+    <sup>2</sup> Requires a custom config to build production code that uses relative imports
     <br>
     <br>
     Note: The markers here are not meant to imply that projects have done anything wrong by lacking support. Some of
