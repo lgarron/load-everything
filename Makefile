@@ -7,14 +7,7 @@ DEPLOY_SFTP_PATH   = "lgarron@towns.dreamhost.com:~/${DEPLOY_SITE_PATH}"
 
 .PHONY: deploy
 deploy:
-	rsync -avz \
-		--exclude .DS_Store \
-		--exclude .git \
-		--exclude .parcel-cache \
-		--exclude node_modules \
-		${DEPLOY_SOURCE_PATH} \
-		${DEPLOY_SFTP_PATH}
-	echo "\nDone deploying. Go to https://${DEPLOY_SITE_PATH}\n"
+	bun x @cubing/deploy
 
 node_modules:
 	npm install
